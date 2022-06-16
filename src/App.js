@@ -1,19 +1,21 @@
 import "./styles.css";
 import { Link } from "@mui/material";
 import { DefaultMap } from "./DefaultMap";
+import data from "./data.json";
 
 export default function App() {
   const people = [...Array(100).keys()].map((el) => {
     return { id: `person${el}`, label: `label${el}`, details: `details${el}` };
   });
 
-  let mainAddresses = [...Array(25).keys()].map((el) => {
+  console.log({ data });
+  let mainAddresses = [...Array(25).keys()].map((el, i) => {
     return {
       id: `mainAddresses${el}_${Math.random()}`,
-      address: `${el} Teddy Street`,
+      address: `${el} Teddy Street ${data[0].countries[el].country} ${data.countries[i].name}`,
       postCode: `41 - 50${el}`,
-      lat: el + 10,
-      lon: el + 10
+      lat: data[0].countries[i].latitude,
+      lon: data[0].countries[i].longitude
     };
   });
 

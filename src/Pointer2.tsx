@@ -156,20 +156,12 @@ export function Pointer2(props: PointerProps) {
         </Popup>
 
         {props.pointerStyle === "circle" && (
-          // <Marker position={[51.505, -0.09]}>
-          //   <Popup>
-          //     A pretty CSS3 popup. <br /> Easily customizable.
-          //   </Popup>
-          // </Marker>
-
           <CircleMarker
-            // center={[20, 0]}
+            key={item.id}
             center={center}
             pathOptions={{
-              // weight: 8, // idsToHighlight.includes(item.id) ? 8 : 4,
               weight: idsToHighlight.includes(item.id) ? 8 : 4,
               color: color
-              // color: "red"
             }}
             radius={idsToHighlight.includes(item.id) ? 4 : 2}
             eventHandlers={{ click: (e) => clicked(e) }}
