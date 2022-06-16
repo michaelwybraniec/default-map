@@ -9,7 +9,8 @@ import { IconButton, Tooltip, Container, Box } from "@mui/material";
 import {
   ZoomInMap as ZoomInMapIcon,
   Circle as CircleIcon,
-  AccountBox as AccountBoxIcon
+  AccountBox as AccountBoxIcon,
+  Flag as FlagIcon
 } from "@mui/icons-material";
 import {
   FeatureGroup,
@@ -127,12 +128,12 @@ export function DefaultMap(props: HeatMapProps) {
               <CircleIcon fontSize="inherit" />
             </ButtonForCircle>
           </Tooltip>
-          <Tooltip title="Set pointer style to avatars" placement="bottom">
+          <Tooltip title="Set pointer style to flags" placement="bottom">
             <ButtonForAvatar
               size="small"
               onClick={() => setPointerStyle("avatar")}
             >
-              <AccountBoxIcon fontSize="inherit" />
+              <FlagIcon fontSize="inherit" />
             </ButtonForAvatar>
           </Tooltip>
           <Tooltip title="Set map to default size" placement="bottom">
@@ -187,7 +188,7 @@ export function DefaultMap(props: HeatMapProps) {
 
   const mainAddressLabel = `
     Main locations:
-    <span style="color:red;font-weight:bold;font-size:12px">
+    <span style="color:black;font-weight:bold;font-size:12px">
       <b>${props.layers.mainAddresses.data.length} ⬤</b>
     </span>
   `;
@@ -202,7 +203,7 @@ export function DefaultMap(props: HeatMapProps) {
   const thirdAddressesLabel = `
           <LayersControl.Overlay checked name={thirdAdressName}>
     Third locations:
-    <span style="color:green;font-weight:bold;font-size:12px">
+    <span style="color:#72638F;font-weight:bold;font-size:12px">
     <b>${props.layers.thirdAddresses.data.length} ⬤</b>
     </span>
   `;
@@ -259,7 +260,7 @@ export function DefaultMap(props: HeatMapProps) {
               </LayersControl.Overlay> */}
               <LayersControl.Overlay checked name={thirdAddressesLabel}>
                 <FeatureGroup>
-                  {makePointer("third locations", thirdAddresses, "green")}
+                  {makePointer("third locations", thirdAddresses, "#72638F")}
                 </FeatureGroup>
               </LayersControl.Overlay>
             </LayersControl>

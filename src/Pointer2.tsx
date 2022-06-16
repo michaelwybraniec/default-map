@@ -23,7 +23,7 @@ export function Pointer2(props: PointerProps) {
     console.log("click", { data });
   };
   // let pointers = Array<ReactNode>();
-  let pointer = "" as any;
+  let pointer = "" as ReactNode;
 
   const miniFlag = (country: string, size: any) => {
     console.log({ country });
@@ -115,7 +115,7 @@ export function Pointer2(props: PointerProps) {
               <tr>
                 <td style={{ paddingRight: "10px" }}>
                   <Avatar
-                    src={"pic"}
+                    src={""}
                     size={"extra-small"}
                     pictureStyle="silver"
                     countryCode={item.countryCode}
@@ -164,10 +164,10 @@ export function Pointer2(props: PointerProps) {
             key={item.id}
             center={center}
             pathOptions={{
-              weight: idsToHighlight.includes(item.id) ? 10 : 6,
+              weight: idsToHighlight.includes(item.id) ? 3 : 1.5,
               color: color
             }}
-            radius={idsToHighlight.includes(item.id) ? 6 : 4}
+            radius={idsToHighlight.includes(item.id) ? 9 : 7}
             eventHandlers={{ click: (e) => clicked(e) }}
           />
         )}
