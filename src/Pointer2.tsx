@@ -3,26 +3,14 @@ import Leaflet from "leaflet";
 import {
   Tooltip,
   CircleMarker,
-  Circle,
   Marker,
   Popup,
   FeatureGroup
 } from "react-leaflet";
 import { Avatar } from "./Avatar";
 import "leaflet/dist/leaflet.css";
-import {
-  Grid
-  // Link
-} from "@mui/material";
-// import { Link as RouterLink } from "react-router-dom";
-// import { Navigation } from "./Navigation";
 
 export function Pointer2(props: PointerProps) {
-  // console.log({ props });
-  const clicked = (data) => {
-    console.log("click", { data });
-  };
-  // let pointers = Array<ReactNode>();
   let pointer = "" as ReactNode;
 
   const miniFlag = (country: string, size: any) => {
@@ -45,12 +33,12 @@ export function Pointer2(props: PointerProps) {
     idsToHighlight: string[]
   ) => {
     return (
-      <FeatureGroup key={item.id}>
+      <FeatureGroup>
         <Tooltip opacity={1} sticky offset={[5, 0]}>
           <table>
             <tbody>
               <tr>
-                <td>
+                <td style={{ paddingRight: "10px" }}>
                   <div>
                     <Avatar
                       src={""}
@@ -62,53 +50,14 @@ export function Pointer2(props: PointerProps) {
                 </td>
                 <td style={{ paddingRight: "8px" }}>
                   <div>
-                    <Grid container spacing={0}>
-                      <Grid item xs={12}>
-                        <Grid container spacing={0}>
-                          <Grid item xs={12}>
-                            <div style={{ fontWeight: 600, fontSize: "12px" }}>
-                              {item.address}
-                            </div>
-                          </Grid>
-                          <Grid item xs={12}>
-                            <div>
-                              <span
-                                style={{ fontSize: "9px", fontWeight: 400 }}
-                              >
-                                {item.postCode}
-                              </span>
-                              <span
-                                style={{
-                                  fontSize: "9px",
-                                  marginLeft: "4px",
-                                  fontWeight: 600,
-                                  color: color
-                                }}
-                              >
-                                {item.address.length}
-                              </span>
-                              <span
-                                style={{
-                                  height: "8.5px",
-                                  width: "8.5px",
-                                  marginLeft: "4px",
-                                  backgroundColor: color,
-                                  borderRadius: " 50%",
-                                  display: "inline-block",
-                                  verticalAlign: "middle"
-                                }}
-                              ></span>
-                            </div>
-                          </Grid>
-                        </Grid>
-                      </Grid>
-                    </Grid>
+                    <span style={{ fontSize: "12px" }}>{item.address}</span>
                   </div>
                 </td>
               </tr>
             </tbody>
           </table>
         </Tooltip>
+
         <Popup>
           <table>
             <tbody>
@@ -116,43 +65,13 @@ export function Pointer2(props: PointerProps) {
                 <td style={{ paddingRight: "10px" }}>
                   <Avatar
                     src={""}
-                    size={"extra-small"}
+                    size={"extreme-small"}
                     pictureStyle="silver"
                     countryCode={item.countryCode}
                   />
                 </td>
                 <td>
-                  <Grid container spacing={2}>
-                    <Grid item xs={12}>
-                      <Grid container spacing={0}>
-                        <Grid item xs={12}>
-                          <div style={{ fontSize: "13px" }}>
-                            {/* <Link */}
-                            {/* component={RouterLink} */}
-                            {/* to={Navigation.avatar.url(profileId)} */}
-                            underline="hover"
-                            {/* > */}
-                            <b>{item.address}</b>
-                            {/* </Link> */}
-                          </div>
-                        </Grid>
-                        <Grid item xs={12} style={{ marginTop: "3px" }}>
-                          <span style={{ fontSize: "12px" }}>
-                            {item.address}:{" "}
-                          </span>
-                          <span
-                            style={{
-                              color: color,
-                              fontWeight: "bold",
-                              fontSize: "12px"
-                            }}
-                          >
-                            <b>{item.address.length} ⬤</b>
-                          </span>
-                        </Grid>
-                      </Grid>
-                    </Grid>
-                  </Grid>
+                  <span style={{ fontSize: "12px" }}>{item.address}</span>
                 </td>
               </tr>
             </tbody>
@@ -168,7 +87,6 @@ export function Pointer2(props: PointerProps) {
               color: color
             }}
             radius={idsToHighlight.includes(item.id) ? 9 : 7}
-            eventHandlers={{ click: (e) => clicked(e) }}
           />
         )}
         {props.pointerStyle === "avatar" && (
@@ -179,7 +97,6 @@ export function Pointer2(props: PointerProps) {
             )}
             key={item.id}
             position={center}
-            eventHandlers={{ click: (e) => clicked(e) }}
           ></Marker>
         )}
       </FeatureGroup>

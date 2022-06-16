@@ -1,7 +1,6 @@
 import { ReactNode, useEffect, useState, useCallback, useMemo } from "react";
 
 import { HeatMapLoading } from "./Loading";
-import { Pointer } from "./Pointer";
 import { Pointer2 } from "./Pointer2";
 
 import { useEventHandlers } from "@react-leaflet/core";
@@ -9,7 +8,6 @@ import { IconButton, Tooltip, Container, Box } from "@mui/material";
 import {
   ZoomInMap as ZoomInMapIcon,
   Circle as CircleIcon,
-  AccountBox as AccountBoxIcon,
   Flag as FlagIcon
 } from "@mui/icons-material";
 import {
@@ -20,9 +18,7 @@ import {
   ZoomControl,
   useMap,
   useMapEvent,
-  Rectangle,
-  Marker,
-  Popup
+  Rectangle
 } from "react-leaflet";
 import { styled } from "@mui/material/styles";
 import { ButtonProps } from "@mui/material/Button";
@@ -67,10 +63,6 @@ export function DefaultMap(props: HeatMapProps) {
     useEventHandlers({ instance: parentMap } as any, handlers);
     return <Rectangle bounds={bounds} />;
   };
-
-  // const getStatsByPersonId = (personId: string) => {
-  //   return props.layers.byAddress?.find((m: any) => m.id === personId);
-  // };
 
   const CustomControl = ({ zoom }: any) => {
     const parentMap = useMap();
@@ -183,8 +175,7 @@ export function DefaultMap(props: HeatMapProps) {
   };
 
   const mainAddresses = props.layers.mainAddresses.data;
-  // const secondAddresses = props.layers.secondAddresses.data;
-  const thirdAddresses = props.layers.thirdAddresses.data;
+  const secondAddresses = props.layers.secondAddresses.data;
 
   const mainAddressLabel = `
     Main locations:
@@ -193,20 +184,12 @@ export function DefaultMap(props: HeatMapProps) {
     </span>
   `;
 
-  // const secondAddressesLabel = `
-  //   Second locations:
-  //   <span style="color:blue;font-weight:bold;font-size:12px">
-  //   <b>${props.layers.secondAddresses.data.length} ⬤</b>
-  //   </span>
-  // `;
-
-  const thirdAddressesLabel = `
-          <LayersControl.Overlay checked name={thirdAdressName}>
-    Third locations:
-    <span style="color:#72638F;font-weight:bold;font-size:12px">
-    <b>${props.layers.thirdAddresses.data.length} ⬤</b>
-    </span>
-  `;
+  const secondAddressesLabel = `
+  Second locations:
+  <span style="color:#72638F;font-weight:bold;font-size:12px">
+    <b>${props.layers.secondAddresses.data.length} ⬤</b>
+  </span>
+`;
 
   const ZoomWatchHook = () => {
     const map = useMapEvent("zoom", () => {
@@ -253,14 +236,9 @@ export function DefaultMap(props: HeatMapProps) {
                   {makePointer("Main locations", mainAddresses, "black")}
                 </FeatureGroup>
               </LayersControl.Overlay>
-              {/* <LayersControl.Overlay checked name={secondAddressesLabel}>
+              <LayersControl.Overlay checked name={secondAddressesLabel}>
                 <FeatureGroup>
-                  {makePointer("Second locations", secondAddresses, "blue")}
-                </FeatureGroup>
-              </LayersControl.Overlay> */}
-              <LayersControl.Overlay checked name={thirdAddressesLabel}>
-                <FeatureGroup>
-                  {makePointer("third locations", thirdAddresses, "#72638F")}
+                  {makePointer("Second locations", secondAddresses, "#72638F")}
                 </FeatureGroup>
               </LayersControl.Overlay>
             </LayersControl>
