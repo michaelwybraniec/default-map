@@ -2,6 +2,8 @@ import { ReactNode, useEffect, useState, useCallback, useMemo } from "react";
 
 import { HeatMapLoading } from "./Loading";
 import { Pointer } from "./Pointer";
+import { Pointer2 } from "./Pointer2";
+
 import { useEventHandlers } from "@react-leaflet/core";
 import { IconButton, Tooltip, Container, Box } from "@mui/material";
 import {
@@ -17,7 +19,9 @@ import {
   ZoomControl,
   useMap,
   useMapEvent,
-  Rectangle
+  Rectangle,
+  Marker,
+  Popup
 } from "react-leaflet";
 import { styled } from "@mui/material/styles";
 import { ButtonProps } from "@mui/material/Button";
@@ -165,7 +169,7 @@ export function DefaultMap(props: HeatMapProps) {
     const circles = Array<ReactNode>();
     layerGroupItems.forEach((item: any) => {
       circles.push(
-        Pointer({
+        Pointer2({
           groupName,
           groupColor,
           item,
@@ -249,10 +253,14 @@ export function DefaultMap(props: HeatMapProps) {
 
             <LayersControl position="bottomleft" collapsed={false}>
               <CustomControl />
-
               <LayersControl.Overlay checked name={mainAddressLabel}>
                 <FeatureGroup>
                   {makePointer("Main locations", mainAddresses, "red")}
+                  {/* <Marker position={[51.505, -0.09]}>
+                    <Popup>
+                      A pretty CSS3 popup. <br /> Easily customizable.
+                    </Popup>
+                  </Marker> */}
                 </FeatureGroup>
               </LayersControl.Overlay>
               {/* <LayersControl.Overlay checked name={secondAddressesLabel}>

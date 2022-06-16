@@ -9,7 +9,7 @@ export default function App() {
 
   let mainAddresses = [...Array(25).keys()].map((el) => {
     return {
-      id: `address${el}`,
+      id: `mainAddresses${el}_${Math.random()}`,
       address: `${el} Teddy Street`,
       postCode: `41 - 50${el}`,
       lat: el + 10,
@@ -19,7 +19,7 @@ export default function App() {
 
   const secondAddresses = [...Array(400).keys()].map((el) => {
     return {
-      id: `address${el}`,
+      id: `secondAddresses${el}_${Math.random()}`,
       address: `${el} Wally Avenue`,
       postCode: `60 - 00${el}`,
       lat: el + 10,
@@ -29,7 +29,7 @@ export default function App() {
 
   const thirdAddresses = [...Array(200).keys()].map((el) => {
     return {
-      id: `address${el}`,
+      id: `thirdAddresses${el}_${Math.random()}`,
       address: `${el} Wally Avenue`,
       postCode: `60 - 00${el}`,
       lat: el + 10,
@@ -59,7 +59,8 @@ export default function App() {
     <div className="App">
       <DefaultMap
         people={people}
-        peopleToHighlight={[1, 4, 44, 53]}
+        // peopleToHighlight={[1, 4, 44, 53]}
+        peopleToHighlight={[]}
         layers={layers}
         loading={false}
       />

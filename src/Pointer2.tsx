@@ -19,13 +19,13 @@ import {
 const personAvatarAlt =
   "https://p1.hiclipart.com/preview/565/751/756/man-avatar-male-silhouette-user-profile-gentleman-suit-head-png-clipart.jpg";
 
-export function Pointer(props: PointerProps) {
+export function Pointer2(props: PointerProps) {
   console.log({ props });
   const clicked = (data) => {
     console.log("click", { data });
   };
-  let pointers = Array<ReactNode>();
-  // let pointer = "";
+  // let pointers = Array<ReactNode>();
+  let pointer = "";
 
   const icon = (photo: any, size: any) => {
     return new Leaflet.Icon({
@@ -37,17 +37,13 @@ export function Pointer(props: PointerProps) {
   };
 
   const createPointer = (
-    key: string,
     color: string,
     item: any,
     center: any,
     idsToHighlight: string[]
   ) => {
-    pointers.push(
-      <FeatureGroup
-        key={key}
-        // key={item.id}
-      >
+    return (
+      <FeatureGroup key={item.id}>
         <Tooltip opacity={1} sticky offset={[5, 0]}>
           <table>
             <tbody>
@@ -160,43 +156,29 @@ export function Pointer(props: PointerProps) {
         </Popup>
 
         {props.pointerStyle === "circle" && (
-          <Marker position={[51.505, -0.09]}>
-            <Popup>
-              A pretty CSS3 popup. <br /> Easily customizable.
-            </Popup>
-          </Marker>
-
-          // <CircleMarker
-          //   center={[20, 0]} //{center}
-          //   pathOptions={{
-          //     weight: 8, // idsToHighlight.includes(item.id) ? 8 : 4,
-          //     color: "red" //color
-          //   }}
-          //   radius={idsToHighlight.includes(item.id) ? 4 : 2}
-          //   eventHandlers={{ click: (e) => clicked(e) }}
-          // />
-
-          // <Circle
-          //   center={new Leaflet.LatLng(50.49, 10)} //{center}
-          //   pathOptions={{
-          //     // weight: 8, // idsToHighlight.includes(item.id) ? 8 : 4,
-          //     fillColor: "red" //color
-          //   }}
-          //   radius={100} // {idsToHighlight.includes(item.id) ? 4 : 2}
-          //   // eventHandlers={{ click: (e) => clicked(e) }}
-          // />
-
           // <Marker position={[51.505, -0.09]}>
           //   <Popup>
           //     A pretty CSS3 popup. <br /> Easily customizable.
           //   </Popup>
           // </Marker>
+
+          <CircleMarker
+            // center={[20, 0]}
+            center={center}
+            pathOptions={{
+              // weight: 8, // idsToHighlight.includes(item.id) ? 8 : 4,
+              weight: idsToHighlight.includes(item.id) ? 8 : 4,
+              color: color
+              // color: "red"
+            }}
+            radius={idsToHighlight.includes(item.id) ? 4 : 2}
+            eventHandlers={{ click: (e) => clicked(e) }}
+          />
         )}
         {props.pointerStyle === "avatar" && (
           <Marker
             icon={icon("pic", idsToHighlight.includes(item.id) ? 25 : 15)}
-            key={key}
-            // key={item.id}
+            key={item.id}
             position={center}
             eventHandlers={{ click: (e) => clicked(e) }}
           ></Marker>
@@ -205,65 +187,29 @@ export function Pointer(props: PointerProps) {
     );
   };
 
-  // if (props.peopleToHighlight?.length > 0) {
-  //   if (props.peopleToHighlight.includes(props.item.id)) {
-  //     createPointer(
-  //       props.groupColor,
-  //       props.item,
-  //       new Leaflet.LatLng(item.lat, item.lon),
-  //       props.peopleToHighlight
-  //     );
-  //   }
-  // } else {
-  //   console.log({ item });
-  //   createPointer(
-  //     props.groupColor,
-  //     props.item,
-  //     new Leaflet.LatLng(item.lat, item.lon),
-  //     props.peopleToHighlight
-  //   );
-  // }
+  if (props.peopleToHighlight?.length > 0) {
+    console.log("peopleToHighlight", { props });
+    if (props.peopleToHighlight.includes(props.item.id)) {
+      console.log("peopleToHighlight found ids", { props });
 
-  if (props.item.length > 0) {
-    props.item.forEach((el: any, index: number) => {
-      const { lat, lon, id } = el;
-      const key = `${index}${lat}${lon}${id}}`;
-
-      if (props.peopleToHighlight?.length > 0) {
-        if (props.peopleToHighlight.includes(props.item.id)) {
-          createPointer(
-            key,
-            props.groupColor,
-            props.item,
-            new Leaflet.LatLng(lat, lon),
-            props.peopleToHighlight
-          );
-        }
-      } else {
-        createPointer(
-          key,
-          props.groupColor,
-          props.item,
-          new Leaflet.LatLng(lat, lon),
-          props.peopleToHighlight
-        );
-      }
-    });
+      pointer = createPointer(
+        props.groupColor,
+        props.item,
+        new Leaflet.LatLng(props.item.lat, props.item.lon),
+        props.peopleToHighlight
+      );
+    }
+  } else {
+    console.log({ props });
+    pointer = createPointer(
+      props.groupColor,
+      props.item,
+      new Leaflet.LatLng(props.item.lat, props.item.lon),
+      props.peopleToHighlight
+    );
   }
 
-  return pointers;
-  // return pointer;
-  // return (
-  //   <Circle
-  //     center={new Leaflet.LatLng(50.49, 10)} //{center}
-  //     pathOptions={{
-  //       // weight: 8, // idsToHighlight.includes(item.id) ? 8 : 4,
-  //       fillColor: "red" //color
-  //     }}
-  //     radius={100} // {idsToHighlight.includes(item.id) ? 4 : 2}
-  //     // eventHandlers={{ click: (e) => clicked(e) }}
-  //   />
-  // );
+  return pointer;
 }
 
 export interface PointerProps {
