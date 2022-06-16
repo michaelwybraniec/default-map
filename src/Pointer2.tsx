@@ -27,7 +27,7 @@ export function Pointer2(props: PointerProps) {
 
   const miniFlag = (country: string, size: any) => {
     console.log({ country });
-    const countryCode = country.toString().toLowerCase();
+    const countryCode = country.toLowerCase();
     const countryFlag = `https://flagcdn.com/48x36/${countryCode}.png`;
 
     return new Leaflet.Icon({
@@ -56,7 +56,7 @@ export function Pointer2(props: PointerProps) {
                       src={""}
                       size={"extreme-small"}
                       pictureStyle="silver"
-                      countryCode={item.country}
+                      countryCode={item.countryCode}
                     />
                   </div>
                 </td>
@@ -118,7 +118,7 @@ export function Pointer2(props: PointerProps) {
                     src={"pic"}
                     size={"extra-small"}
                     pictureStyle="silver"
-                    countryCode={item.country}
+                    countryCode={item.countryCode}
                   />
                 </td>
                 <td>
@@ -174,7 +174,7 @@ export function Pointer2(props: PointerProps) {
         {props.pointerStyle === "avatar" && (
           <Marker
             icon={miniFlag(
-              item.country,
+              item.countryCode,
               idsToHighlight.includes(item.id) ? 25 : 15
             )}
             key={item.id}
@@ -187,10 +187,7 @@ export function Pointer2(props: PointerProps) {
   };
 
   if (props.peopleToHighlight?.length > 0) {
-    // console.log("peopleToHighlight", { props });
     if (props.peopleToHighlight.includes(props.item.id)) {
-      // console.log("peopleToHighlight found ids", { props });
-
       pointer = createPointer(
         props.groupColor,
         props.item,
@@ -199,7 +196,6 @@ export function Pointer2(props: PointerProps) {
       );
     }
   } else {
-    // console.log({ props });
     pointer = createPointer(
       props.groupColor,
       props.item,

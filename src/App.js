@@ -16,7 +16,8 @@ export default function App() {
       address: `${el} Teddy Street ${data[0].countries[i].country} ${data[0].countries[i].name}`,
       postCode: `41 - 50${el}`,
       lat: data[0].countries[i].latitude,
-      lon: data[0].countries[i].longitude
+      lon: data[0].countries[i].longitude,
+      countryCode: data[0].countries[i].country.toLowerCase()
     };
   });
 
@@ -41,7 +42,8 @@ export default function App() {
       ${data[0].countries[i + 25].name}`,
       postCode: `60 - 00${el}`,
       lat: data[0].countries[i + 25].latitude,
-      lon: data[0].countries[i + 25].longitude
+      lon: data[0].countries[i + 25].longitude,
+      countryCode: data[0].countries[i].country.toLowerCase()
     };
   });
 

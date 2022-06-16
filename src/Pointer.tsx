@@ -58,6 +58,7 @@ export function Pointer(props: PointerProps) {
                       src={""}
                       size={"extreme-small"}
                       pictureStyle="silver"
+                      countryCode={item.country}
                     />
                   </div>
                 </td>
@@ -119,6 +120,7 @@ export function Pointer(props: PointerProps) {
                     src={"pic"}
                     size={"extra-small"}
                     pictureStyle="silver"
+                    countryCode={item.country}
                   />
                 </td>
                 <td>

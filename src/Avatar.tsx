@@ -17,7 +17,7 @@ export function Avatar(props: AvatarProps) {
   console.log({ props });
   const [isLoading, setLoading] = useState(true);
   const width = pictureSizes[props.size ?? "medium"];
-  const countryCode = props.countryCode.toString().toLowerCase();
+  const countryCode = props.countryCode;
   const countryFlag = `https://flagcdn.com/48x36/${countryCode}.png`;
   const personAvatarSilver = countryFlag;
   const personAvatarBright = countryFlag;

@@ -35,7 +35,6 @@ export function DefaultMap(props: HeatMapProps) {
 
   useEffect(() => {
     const loadMapUrl = async () => {
-      // setMapUrl("http://{s}.tile.osm.org/{z}/{x}/{y}.png");
       setMapUrl("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png");
     };
     let unmounted = false;
@@ -168,18 +167,17 @@ export function DefaultMap(props: HeatMapProps) {
   ) => {
     const circles = Array<ReactNode>();
     layerGroupItems.forEach((item: any) => {
+      console.log({ item });
       circles.push(
         Pointer2({
           groupName,
           groupColor,
           item,
-          // layers: getMetricsByProfileId(item.id),
           peopleToHighlight: props.peopleToHighlight,
           pointerStyle
         })
       );
     });
-    // console.log({ circles, layerGroupItems });
     return circles;
   };
 
@@ -220,8 +218,6 @@ export function DefaultMap(props: HeatMapProps) {
     <div>
       <Box
         sx={{
-          // height: '385px',
-          // backgroundColor: "grey.300",
           p: 8
         }}
       >
@@ -230,9 +226,7 @@ export function DefaultMap(props: HeatMapProps) {
             style={{
               width: "100%",
               height: "720px",
-              // zIndex: 0,
               borderRadius: "5px",
-              // margin: "1px",
               boxShadow: "0px 0px 0px 1px #b0b0b0"
             }}
             center={[center[0], center[1]]}
