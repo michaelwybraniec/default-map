@@ -17,14 +17,11 @@ export function Avatar(props: AvatarProps) {
   console.log({ props });
   const [isLoading, setLoading] = useState(true);
   const width = pictureSizes[props.size ?? "medium"];
-  const countryCode = props.countryCode;
-  const countryFlag = `https://flagcdn.com/48x36/${countryCode}.png`;
-  const personAvatarSilver = countryFlag;
-  const personAvatarBright = countryFlag;
-
+  const [flag] = useState<string>(
+    `https://flagcdn.com/48x36/${props.countryCode}.png`
+  );
   const swapErroredImg = (e: any) => {
-    e.target.src =
-      props.pictureStyle === "bright" ? personAvatarBright : personAvatarSilver;
+    e.target.src = props.pictureStyle === "bright" ? flag : flag;
     setLoading(false);
   };
 
@@ -38,11 +35,7 @@ export function Avatar(props: AvatarProps) {
       )}
       <Image
         src={
-          props.src
-            ? props.src
-            : props.pictureStyle === "bright"
-            ? personAvatarBright
-            : personAvatarSilver
+          props.src ? props.src : props.pictureStyle === "bright" ? flag : flag
         }
         width={width}
         height={width}
