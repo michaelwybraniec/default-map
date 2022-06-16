@@ -179,7 +179,7 @@ export function DefaultMap(props: HeatMapProps) {
         })
       );
     });
-    console.log({ circles, layerGroupItems });
+    // console.log({ circles, layerGroupItems });
     return circles;
   };
 
@@ -247,7 +247,7 @@ export function DefaultMap(props: HeatMapProps) {
             <ZoomControl position="topleft" />
             <TileLayer
               url={mapUrl}
-              attribution='📚 <a href="https://www.linkedin.com/in/michaelwybraniec/">Michael Wybraniec</a> | &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> | 💰 <a href="https://stand-with-ukraine.pp.ua/">Help Ukraine Now!</a>'
+              attribution='🅳🅴🆅 by <a href="https://www.linkedin.com/in/michaelwybraniec/">𝙈𝙞𝙘𝙝𝙖𝙚𝙡 𝙒𝙮𝙗𝙧𝙖𝙣𝙞𝙚𝙘</a> | &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> | 💰 <a href="https://stand-with-ukraine.pp.ua/">Help Ukraine Now!</a>'
             />
             <ZoomWatchHook />
 
@@ -255,7 +255,7 @@ export function DefaultMap(props: HeatMapProps) {
               <CustomControl />
               <LayersControl.Overlay checked name={mainAddressLabel}>
                 <FeatureGroup>
-                  {makePointer("Main locations", mainAddresses, "red")}
+                  {makePointer("Main locations", mainAddresses, "black")}
                 </FeatureGroup>
               </LayersControl.Overlay>
               {/* <LayersControl.Overlay checked name={secondAddressesLabel}>

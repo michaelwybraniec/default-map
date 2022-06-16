@@ -16,8 +16,6 @@ import {
 } from "@mui/material";
 // import { Link as RouterLink } from "react-router-dom";
 // import { Navigation } from "./Navigation";
-const personAvatarAlt =
-  "https://p1.hiclipart.com/preview/565/751/756/man-avatar-male-silhouette-user-profile-gentleman-suit-head-png-clipart.jpg";
 
 export function Pointer2(props: PointerProps) {
   // console.log({ props });
@@ -27,9 +25,13 @@ export function Pointer2(props: PointerProps) {
   // let pointers = Array<ReactNode>();
   let pointer = "" as any;
 
-  const icon = (photo: any, size: any) => {
+  const miniFlag = (country: string, size: any) => {
+    console.log({ country });
+    const countryCode = country.toString().toLowerCase();
+    const countryFlag = `https://flagcdn.com/48x36/${countryCode}.png`;
+
     return new Leaflet.Icon({
-      iconUrl: photo ? photo : personAvatarAlt,
+      iconUrl: countryFlag ? countryFlag : "🏴‍☠️",
       iconSize: [size, size + size / 15],
       iconAnchor: [size / 2, size / 1.5],
       popupAnchor: [0, -size / 2]
@@ -54,6 +56,7 @@ export function Pointer2(props: PointerProps) {
                       src={""}
                       size={"extreme-small"}
                       pictureStyle="silver"
+                      countryCode={item.country}
                     />
                   </div>
                 </td>
@@ -115,6 +118,7 @@ export function Pointer2(props: PointerProps) {
                     src={"pic"}
                     size={"extra-small"}
                     pictureStyle="silver"
+                    countryCode={item.country}
                   />
                 </td>
                 <td>
@@ -160,16 +164,19 @@ export function Pointer2(props: PointerProps) {
             key={item.id}
             center={center}
             pathOptions={{
-              weight: idsToHighlight.includes(item.id) ? 8 : 4,
+              weight: idsToHighlight.includes(item.id) ? 10 : 6,
               color: color
             }}
-            radius={idsToHighlight.includes(item.id) ? 4 : 2}
+            radius={idsToHighlight.includes(item.id) ? 6 : 4}
             eventHandlers={{ click: (e) => clicked(e) }}
           />
         )}
         {props.pointerStyle === "avatar" && (
           <Marker
-            icon={icon("pic", idsToHighlight.includes(item.id) ? 25 : 15)}
+            icon={miniFlag(
+              item.country,
+              idsToHighlight.includes(item.id) ? 25 : 15
+            )}
             key={item.id}
             position={center}
             eventHandlers={{ click: (e) => clicked(e) }}
@@ -180,9 +187,9 @@ export function Pointer2(props: PointerProps) {
   };
 
   if (props.peopleToHighlight?.length > 0) {
-    console.log("peopleToHighlight", { props });
+    // console.log("peopleToHighlight", { props });
     if (props.peopleToHighlight.includes(props.item.id)) {
-      console.log("peopleToHighlight found ids", { props });
+      // console.log("peopleToHighlight found ids", { props });
 
       pointer = createPointer(
         props.groupColor,
@@ -192,7 +199,7 @@ export function Pointer2(props: PointerProps) {
       );
     }
   } else {
-    console.log({ props });
+    // console.log({ props });
     pointer = createPointer(
       props.groupColor,
       props.item,

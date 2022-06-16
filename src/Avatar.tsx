@@ -1,11 +1,6 @@
 import { useState } from "react";
 import { Box, Skeleton, styled } from "@mui/material";
 
-const personAvatarSilver =
-  "https://p1.hiclipart.com/preview/565/751/756/man-avatar-male-silhouette-user-profile-gentleman-suit-head-png-clipart.jpg";
-const personAvatarBright =
-  "https://p1.hiclipart.com/preview/565/751/756/man-avatar-male-silhouette-user-profile-gentleman-suit-head-png-clipart.jpg";
-
 const Image = styled("img")(({ theme }) => ({
   borderRadius: theme.shape.borderRadius
 }));
@@ -19,8 +14,13 @@ const pictureSizes = {
 };
 
 export function Avatar(props: AvatarProps) {
+  console.log({ props });
   const [isLoading, setLoading] = useState(true);
   const width = pictureSizes[props.size ?? "medium"];
+  const countryCode = props.countryCode.toString().toLowerCase();
+  const countryFlag = `https://flagcdn.com/48x36/${countryCode}.png`;
+  const personAvatarSilver = countryFlag;
+  const personAvatarBright = countryFlag;
 
   const swapErroredImg = (e: any) => {
     e.target.src =
@@ -58,4 +58,5 @@ export interface AvatarProps {
   src: string;
   size?: keyof typeof pictureSizes;
   pictureStyle: string;
+  countryCode: string;
 }
