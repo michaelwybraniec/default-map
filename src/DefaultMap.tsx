@@ -184,7 +184,7 @@ export function DefaultMap(props: HeatMapProps) {
   };
 
   const mainAddresses = props.layers.mainAddresses.data;
-  const secondAddresses = props.layers.secondAddresses.data;
+  // const secondAddresses = props.layers.secondAddresses.data;
   const thirdAddresses = props.layers.thirdAddresses.data;
 
   const mainAddressLabel = `
@@ -194,12 +194,12 @@ export function DefaultMap(props: HeatMapProps) {
     </span>
   `;
 
-  const secondAddressesLabel = `
-    Second locations:
-    <span style="color:blue;font-weight:bold;font-size:12px">
-    <b>${props.layers.secondAddresses.data.length} ⬤</b>
-    </span>
-  `;
+  // const secondAddressesLabel = `
+  //   Second locations:
+  //   <span style="color:blue;font-weight:bold;font-size:12px">
+  //   <b>${props.layers.secondAddresses.data.length} ⬤</b>
+  //   </span>
+  // `;
 
   const thirdAddressesLabel = `
           <LayersControl.Overlay checked name={thirdAdressName}>
@@ -256,23 +256,18 @@ export function DefaultMap(props: HeatMapProps) {
               <LayersControl.Overlay checked name={mainAddressLabel}>
                 <FeatureGroup>
                   {makePointer("Main locations", mainAddresses, "red")}
-                  {/* <Marker position={[51.505, -0.09]}>
-                    <Popup>
-                      A pretty CSS3 popup. <br /> Easily customizable.
-                    </Popup>
-                  </Marker> */}
                 </FeatureGroup>
               </LayersControl.Overlay>
               {/* <LayersControl.Overlay checked name={secondAddressesLabel}>
                 <FeatureGroup>
                   {makePointer("Second locations", secondAddresses, "blue")}
                 </FeatureGroup>
-              </LayersControl.Overlay>
+              </LayersControl.Overlay> */}
               <LayersControl.Overlay checked name={thirdAddressesLabel}>
                 <FeatureGroup>
                   {makePointer("third locations", thirdAddresses, "green")}
                 </FeatureGroup>
-              </LayersControl.Overlay> */}
+              </LayersControl.Overlay>
             </LayersControl>
           </MapContainer>
         </Container>

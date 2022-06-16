@@ -20,12 +20,12 @@ const personAvatarAlt =
   "https://p1.hiclipart.com/preview/565/751/756/man-avatar-male-silhouette-user-profile-gentleman-suit-head-png-clipart.jpg";
 
 export function Pointer2(props: PointerProps) {
-  console.log({ props });
+  // console.log({ props });
   const clicked = (data) => {
     console.log("click", { data });
   };
   // let pointers = Array<ReactNode>();
-  let pointer = "";
+  let pointer = "" as any;
 
   const icon = (photo: any, size: any) => {
     return new Leaflet.Icon({
