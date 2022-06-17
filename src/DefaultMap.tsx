@@ -1,15 +1,15 @@
-import { ReactNode, useEffect, useState, useCallback, useMemo } from "react";
+import { ReactNode, useEffect, useState, useCallback, useMemo } from 'react';
 
-import { HeatMapLoading } from "./Loading";
-import { Pointer2 } from "./Pointer2";
+import { MapLoading } from './Loading.tsx';
+import { Pointer2 } from './Pointer2.tsx';
 
-import { useEventHandlers } from "@react-leaflet/core";
-import { IconButton, Tooltip, Container, Box } from "@mui/material";
+import { useEventHandlers } from '@react-leaflet/core';
+import { IconButton, Tooltip, Container, Box } from '@mui/material';
 import {
   ZoomInMap as ZoomInMapIcon,
   Circle as CircleIcon,
-  Flag as FlagIcon
-} from "@mui/icons-material";
+  Flag as FlagIcon,
+} from '@mui/icons-material';
 import {
   FeatureGroup,
   MapContainer,
@@ -18,21 +18,21 @@ import {
   ZoomControl,
   useMap,
   useMapEvent,
-  Rectangle
-} from "react-leaflet";
-import { styled } from "@mui/material/styles";
-import { ButtonProps } from "@mui/material/Button";
+  Rectangle,
+} from 'react-leaflet';
+import { styled } from '@mui/material/styles';
+import { ButtonProps } from '@mui/material/Button';
 
 export function DefaultMap(props: HeatMapProps) {
   const [mapUrl, setMapUrl] = useState<string | undefined>();
   const [center] = useState<number[]>([45, 3]);
   const [zoom] = useState<number>(2);
   const [currnetZoom, setCurrentZoom] = useState<number>(0);
-  const [pointerStyle, setPointerStyle] = useState<string>("circle");
+  const [pointerStyle, setPointerStyle] = useState<string>('circle');
 
   useEffect(() => {
     const loadMapUrl = async () => {
-      setMapUrl("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png");
+      setMapUrl('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
     };
     let unmounted = false;
     setTimeout(() => {
@@ -43,7 +43,7 @@ export function DefaultMap(props: HeatMapProps) {
     };
   }, []);
 
-  if (!mapUrl) return <HeatMapLoading />;
+  if (!mapUrl) return <MapLoading />;
 
   const MinimapBounds = ({ parentMap, zoom }: any) => {
     const miniMap = useMap();
@@ -51,15 +51,13 @@ export function DefaultMap(props: HeatMapProps) {
       (e) => parentMap.setView(e.latlng, parentMap.getZoom()),
       [parentMap]
     );
-    useMapEvent("click", onClick);
+    useMapEvent('click', onClick);
     const [bounds, setBounds] = useState(parentMap.getBounds());
     const onChange = useCallback(() => {
       setBounds(parentMap.getBounds());
       miniMap.setView(parentMap.getCenter(), zoom);
     }, [miniMap, parentMap, zoom]);
-    const handlers = useMemo(() => ({ move: onChange, zoom: onChange }), [
-      onChange
-    ]);
+    const handlers = useMemo(() => ({ move: onChange, zoom: onChange }), [onChange]);
     useEventHandlers({ instance: parentMap } as any, handlers);
     return <Rectangle bounds={bounds} />;
   };
@@ -74,8 +72,8 @@ export function DefaultMap(props: HeatMapProps) {
           style={{
             height: 72.59,
             width: 172.27,
-            borderRadius: "5px",
-            boxShadow: "0px 0px 0px 1px rgb(203 203 203)"
+            borderRadius: '5px',
+            boxShadow: '0px 0px 0px 1px rgb(203 203 203)',
           }}
           center={parentMap.getCenter()}
           zoom={mapZoom}
@@ -98,41 +96,32 @@ export function DefaultMap(props: HeatMapProps) {
     };
 
     const ButtonForCircle = styled(IconButton)<ButtonProps>(() => ({
-      color: pointerStyle === "circle" ? "#303e48" : "#697985"
+      color: pointerStyle === 'circle' ? '#303e48' : '#697985',
     }));
 
     const ButtonForAvatar = styled(IconButton)<ButtonProps>(() => ({
-      color: pointerStyle === "avatar" ? "#303e48" : "#697985"
+      color: pointerStyle === 'avatar' ? '#303e48' : '#697985',
     }));
 
     const ButtonForResetMapToDefault = styled(IconButton)<ButtonProps>(() => ({
-      color: currnetZoom !== 1.5 ? "#303e48" : "#697985"
+      color: currnetZoom !== 1.5 ? '#303e48' : '#697985',
     }));
 
     return (
       <div className="leaflet-top leaflet-right">
-        <div style={{ marginRight: "12px" }} className="leaflet-control">
+        <div style={{ marginRight: '12px' }} className="leaflet-control">
           <Tooltip title="Set pointer style to circles" placement="bottom">
-            <ButtonForCircle
-              size="small"
-              onClick={() => setPointerStyle("circle")}
-            >
+            <ButtonForCircle size="small" onClick={() => setPointerStyle('circle')}>
               <CircleIcon fontSize="inherit" />
             </ButtonForCircle>
           </Tooltip>
           <Tooltip title="Set pointer style to flags" placement="bottom">
-            <ButtonForAvatar
-              size="small"
-              onClick={() => setPointerStyle("avatar")}
-            >
+            <ButtonForAvatar size="small" onClick={() => setPointerStyle('avatar')}>
               <FlagIcon fontSize="inherit" />
             </ButtonForAvatar>
           </Tooltip>
           <Tooltip title="Set map to default size" placement="bottom">
-            <ButtonForResetMapToDefault
-              size="small"
-              onClick={resetMapToDefault}
-            >
+            <ButtonForResetMapToDefault size="small" onClick={resetMapToDefault}>
               <ZoomInMapIcon fontSize="inherit" />
             </ButtonForResetMapToDefault>
           </Tooltip>
@@ -141,9 +130,9 @@ export function DefaultMap(props: HeatMapProps) {
           <div
             className="leaflet-control"
             style={{
-              borderRadius: "15px",
-              boxShadow: "0px 0px 0px 1px rgb(203 203 203)",
-              marginRight: "15px"
+              borderRadius: '15px',
+              boxShadow: '0px 0px 0px 1px rgb(203 203 203)',
+              marginRight: '15px',
             }}
           >
             {miniMap && miniMap}
@@ -153,11 +142,7 @@ export function DefaultMap(props: HeatMapProps) {
     );
   };
 
-  const makePointer = (
-    groupName: string,
-    layerGroupItems: any,
-    groupColor: string
-  ) => {
+  const makePointer = (groupName: string, layerGroupItems: any, groupColor: string) => {
     const circles = Array<ReactNode>();
     layerGroupItems.forEach((item: any) => {
       console.log({ item });
@@ -167,7 +152,7 @@ export function DefaultMap(props: HeatMapProps) {
           groupColor,
           item,
           peopleToHighlight: props.peopleToHighlight,
-          pointerStyle
+          pointerStyle,
         })
       );
     });
@@ -192,7 +177,7 @@ export function DefaultMap(props: HeatMapProps) {
 `;
 
   const ZoomWatchHook = () => {
-    const map = useMapEvent("zoom", () => {
+    const map = useMapEvent('zoom', () => {
       setCurrentZoom(map.getZoom());
     });
     return null;
@@ -202,16 +187,16 @@ export function DefaultMap(props: HeatMapProps) {
     <div>
       <Box
         sx={{
-          p: 8
+          p: 8,
         }}
       >
-        <Container maxWidth="xl" sx={{ height: "100%", textAlign: "left" }}>
+        <Container maxWidth="xl" sx={{ height: '100%', textAlign: 'left' }}>
           <MapContainer
             style={{
-              width: "100%",
-              height: "720px",
-              borderRadius: "5px",
-              boxShadow: "0px 0px 0px 1px #b0b0b0"
+              width: '100%',
+              height: '720px',
+              borderRadius: '5px',
+              boxShadow: '0px 0px 0px 1px #b0b0b0',
             }}
             center={[center[0], center[1]]}
             zoom={zoom}
@@ -232,13 +217,11 @@ export function DefaultMap(props: HeatMapProps) {
             <LayersControl position="bottomleft" collapsed={false}>
               <CustomControl />
               <LayersControl.Overlay checked name={mainAddressLabel}>
-                <FeatureGroup>
-                  {makePointer("Main locations", mainAddresses, "black")}
-                </FeatureGroup>
+                <FeatureGroup>{makePointer('Main locations', mainAddresses, 'black')}</FeatureGroup>
               </LayersControl.Overlay>
               <LayersControl.Overlay checked name={secondAddressesLabel}>
                 <FeatureGroup>
-                  {makePointer("Second locations", secondAddresses, "#72638F")}
+                  {makePointer('Second locations', secondAddresses, '#72638F')}
                 </FeatureGroup>
               </LayersControl.Overlay>
             </LayersControl>

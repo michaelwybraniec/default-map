@@ -1,7 +1,7 @@
-import "./styles.css";
-import { Link } from "@mui/material";
-import { DefaultMap } from "./DefaultMap";
-import data from "./data.json";
+import './styles.css';
+import { Link } from '@mui/material';
+import { DefaultMap } from './DefaultMap.tsx';
+import data from './data.json';
 
 export default function App() {
   const people = [...Array(100).keys()].map((el) => {
@@ -19,7 +19,7 @@ export default function App() {
       `,
       lat: data[0].countries[i].latitude,
       lon: data[0].countries[i].longitude,
-      countryCode: data[0].countries[i].country.toLowerCase()
+      countryCode: data[0].countries[i].country.toLowerCase(),
     };
   });
 
@@ -32,7 +32,7 @@ export default function App() {
       `,
       lat: data[0].countries[i + 25].latitude,
       lon: data[0].countries[i + 25].longitude,
-      countryCode: data[0].countries[i + 25].country.toLowerCase()
+      countryCode: data[0].countries[i + 25].country.toLowerCase(),
     };
   });
 
@@ -40,13 +40,13 @@ export default function App() {
     mainAddresses: {
       data: mainAddresses.map((el, index) => {
         return { ...el, tenants: people.filter((p, i) => i > 25 * index + 1) };
-      })
+      }),
     },
     secondAddresses: {
       data: secondAddresses.map((el, index) => {
         return { ...el, tenants: people.filter((p, i) => i > 50 * index + 1) };
-      })
-    }
+      }),
+    },
     // thirdAddresses: {
     //   data: thirdAddresses.map((el, index) => {
     //     return { ...el, tenants: people.filter((p, i) => i > 50 * index + 1) };
@@ -63,11 +63,8 @@ export default function App() {
         layers={layers}
         loading={false}
       />
-      <div style={{ padding: "10px" }}>
-        <b>
-          Did you know that Leaflet 1.8 has been released in the middle of war
-          ?!
-        </b>
+      <div style={{ padding: '10px' }}>
+        <b>Did you know that Leaflet 1.8 has been released in the middle of war ?!</b>
         <p> Thank you for a fantastic work ♡</p>
         <Link href="https://stand-with-ukraine.pp.ua/">Help Ukraine Now!</Link>
       </div>
